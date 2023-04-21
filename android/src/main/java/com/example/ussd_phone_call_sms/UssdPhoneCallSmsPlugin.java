@@ -8,7 +8,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.telephony.SmsManager;
 import android.util.Log;
-
+import android.telecom.TelecomManager;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 
@@ -60,7 +60,7 @@ public class UssdPhoneCallSmsPlugin implements FlutterPlugin, MethodCallHandler 
           }
 
           callIntent.setData(Uri.parse("tel:" +number));
-
+          callIntent.putExtra(TelecomManager.EXTRA_START_CALL_WITH_SPEAKERPHONE, true);
           context.startActivity(callIntent);
 
           result.success("Success");
