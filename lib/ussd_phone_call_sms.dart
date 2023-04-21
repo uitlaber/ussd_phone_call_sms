@@ -10,10 +10,10 @@ class UssdPhoneCallSms {
   /// calling a function phoneCall
   /// for both IOS and android this function has been invoked
   /// only one parameter is phone number. this is the number where
-  phoneCall({required String phoneNumber}) async {
+  phoneCall({required String phoneNumber, bool speaker = false}) async {
     try {
-      await _androidChannel.invokeMethod(
-          'phoneCall', <String, dynamic>{"phone_number": phoneNumber});
+      await _androidChannel.invokeMethod('phoneCall',
+          <String, dynamic>{"phone_number": phoneNumber, "speaker": speaker});
     } catch (e, s) {
       debugPrint("Inside ussd_phone_call_sms -> phoneCall method error: $e");
       debugPrint("Inside ussd_phone_call_sms -> phoneCall method stack: $s");

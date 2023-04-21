@@ -54,13 +54,14 @@ public class UssdPhoneCallSmsPlugin implements FlutterPlugin, MethodCallHandler 
           Intent callIntent = new Intent(Intent.ACTION_CALL);
           callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
           String number = call.argument("phone_number");
+          boolean speaker = call.argument("speaker");
 
           if(number != null && number.charAt(0) == '*' && number.charAt(number.length() -1) == '#'){
             number = number.substring(0, number.length() -1) + Uri.encode("#");
           }
 
           callIntent.setData(Uri.parse("tel:" +number));
-          callIntent.putExtra(TelecomManager.EXTRA_START_CALL_WITH_SPEAKERPHONE, true);
+          callIntent.putExtra(TelecomManager.EXTRA_START_CALL_WITH_SPEAKERPHONE, speaker);
           context.startActivity(callIntent);
 
           result.success("Success");
